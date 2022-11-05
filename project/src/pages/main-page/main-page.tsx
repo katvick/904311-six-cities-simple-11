@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import CityCard from '../../components/sity-card/sity-card';
 import Logo from '../../components/logo/logo';
 
@@ -8,6 +9,10 @@ type MainPageProps = {
 function MainPage({countRentOffers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 Cities. Main</title>
+      </Helmet>
+
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
