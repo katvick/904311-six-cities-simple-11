@@ -1,4 +1,4 @@
-import Logo from '../../components/app/logo/logo';
+import Logo from '../../components/logo/logo';
 
 function RoomPage(): JSX.Element {
   return (

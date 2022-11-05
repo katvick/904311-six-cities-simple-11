@@ -1,5 +1,5 @@
 import CityCard from '../../components/sity-card/sity-card';
-import Logo from '../../components/app/logo/logo';
+import Logo from '../../components/logo/logo';
 
 type MainPageProps = {
   countRentOffers: number;

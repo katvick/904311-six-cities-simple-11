@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import RoomPage from '../../pages/room-page/room-page';
-
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 type AppProps = {
   countRentOffers: number;
@@ -25,6 +25,10 @@ function App({countRentOffers}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Room}
           element={<RoomPage />}
+        />
+        <Route
+          path="*"
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>
