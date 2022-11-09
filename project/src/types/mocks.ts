@@ -27,3 +27,6 @@ export type Offer = {
   inside: string[];
   owner: OwnerInfo;
 };
+
+export type Offers = Offer[];
+export type Reviews = Review[];

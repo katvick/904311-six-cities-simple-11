@@ -7,11 +7,15 @@ import LoginPage from '../../pages/login-page/login-page';
 import RoomPage from '../../pages/room-page/room-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
+import { Offers, Reviews } from '../../types/mocks';
+
 type AppProps = {
   countRentOffers: number;
+  offers: Offers;
+  reviews: Reviews;
 }
 
-function App({countRentOffers}: AppProps): JSX.Element {
+function App({countRentOffers, offers, reviews}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>

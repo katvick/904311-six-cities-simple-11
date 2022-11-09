@@ -30,7 +30,7 @@ export const offers: Offer[] = [
       'Fridge',
     ],
     owner: {
-      avatar: '../../public/img/avatar-angelina.jpg',
+      avatar: `https://i.pravatar.cc/74?rnd=${Math.random()}`,
       name: 'Bony',
       statusPro: true,
     },
@@ -63,7 +63,7 @@ export const offers: Offer[] = [
       'Fridge',
     ],
     owner: {
-      avatar: '../../public/img/avatar-angelina.jpg',
+      avatar: `https://i.pravatar.cc/74?rnd=${Math.random()}`,
       name: 'Karla',
       statusPro: true,
     },
@@ -98,7 +98,7 @@ export const offers: Offer[] = [
       'Fridge',
     ],
     owner: {
-      avatar: '../../public/img/avatar-angelina.jpg',
+      avatar: `https://i.pravatar.cc/74?rnd=${Math.random()}`,
       name: 'Penny',
       statusPro: true,
     },
