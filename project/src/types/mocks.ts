@@ -1,9 +1,9 @@
 export type Review = {
   avatar: string;
   name: string;
-  rating: number;
+  ratingReview: number;
   date: string;
-  review: string;
+  reviewText: string;
 };
 
 export type OwnerInfo = {
@@ -13,6 +13,7 @@ export type OwnerInfo = {
 }
 
 export type Offer = {
+  id: number;
   city: string;
   header: string;
   picture: string;
@@ -21,10 +22,10 @@ export type Offer = {
   premium: boolean;
   price: number;
   type: string;
-  rating: number;
-  badrooms: number;
+  ratingOffer: number;
+  bedrooms: number;
   adults: number;
-  inside: string[];
+  householdItems: string[];
   owner: OwnerInfo;
 };
 
