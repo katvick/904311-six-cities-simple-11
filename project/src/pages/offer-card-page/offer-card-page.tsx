@@ -2,26 +2,26 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ReviewComponent from '../../components/review/review';
 import OfferCard from '../../components/offer-card/offer-card';
-import { Offer, Reviews } from '../../types/mocks';
+import { Offer } from '../../types/mocks';
 
 type OfferCardPageProps = {
   offer: Offer;
-  reviews: Reviews;
 }
 
-function OfferCardPage({offer, reviews}: OfferCardPageProps): JSX.Element {
+function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
   const {
     header,
     photos,
     description,
     premium,
     type,
-    ratingOffer,
+    rating,
     bedrooms,
     adults,
     price,
     householdItems,
-    owner
+    owner,
+    reviews
   } = offer;
 
   return (
@@ -81,13 +81,13 @@ function OfferCardPage({offer, reviews}: OfferCardPageProps): JSX.Element {
                 <div className="property__stars rating__stars">
                   <span
                     style={{
-                      width: `${ratingOffer / 5 * 100}`
+                      width: `${rating / 5 * 100}%`
                     }}
                   >
                   </span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{ratingOffer}</span>
+                <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -203,9 +203,9 @@ function OfferCardPage({offer, reviews}: OfferCardPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferCard />
-              <OfferCard />
-              <OfferCard />
+              <OfferCard offer={offer} key={1} />
+              <OfferCard offer={offer} key={2} />
+              <OfferCard offer={offer} key={3} />
             </div>
           </section>
         </div>

@@ -9,7 +9,7 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
   const {
     avatar,
     name,
-    ratingReview,
+    rating,
     date,
     reviewText
   } = review;
@@ -29,7 +29,7 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
           <div className="reviews__stars rating__stars">
             <span
               style={{
-                width: `${ratingReview / 5 * 100}`
+                width: `${rating / 5 * 100}%`
               }}
             >
             </span>
