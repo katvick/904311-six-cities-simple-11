@@ -1,28 +1,31 @@
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ReviewComponent from '../../components/review/review';
-import OfferCard from '../../components/offer-card/offer-card';
-import { Offer } from '../../types/mocks';
+import { Offers } from '../../types/mocks';
 
 type OfferCardPageProps = {
-  offer: Offer;
+  offers: Offers;
 }
 
-function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
-  const {
-    header,
-    photos,
-    description,
-    premium,
-    type,
-    rating,
-    bedrooms,
-    adults,
-    price,
-    householdItems,
-    owner,
-    reviews
-  } = offer;
+function OfferCardPage({offers}: OfferCardPageProps): JSX.Element {
+  const params = useParams();
+  const offer = offers.find((item) => String(item.id) === params.id);
+
+  // const {
+  //   header,
+  //   photos,
+  //   description,
+  //   premium,
+  //   type,
+  //   rating,
+  //   bedrooms,
+  //   adults,
+  //   price,
+  //   householdItems,
+  //   owner,
+  //   reviews
+  // } = offer;
 
   return (
     <div className="page">
@@ -57,7 +60,7 @@ function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {photos.map((photo, id) => {
+              {offer?.photos.map((photo, id) => {
                 const keyValue = `${id}-${photo}`;
                 return (
                   <div key={keyValue} className="property__image-wrapper">
@@ -69,45 +72,47 @@ function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>{premium ? 'Premium' : ''}</span>
-              </div>
+              {offer?.premium ?
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div>
+                : ''}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {header}
+                  {offer?.header}
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
                   <span
                     style={{
-                      width: `${rating / 5 * 100}%`
+                      width: `${offer ? offer.rating / 5 * 100 : ''}%`
                     }}
                   >
                   </span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{rating}</span>
+                <span className="property__rating-value rating__value">{offer?.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {type}
+                  {offer?.type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {offer?.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {adults} adults
+                  Max {offer?.adults} adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{price}</b>
+                <b className="property__price-value">&euro;{offer?.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {householdItems.map((item, id) => {
+                  {offer?.householdItems.map((item, id) => {
                     const keyValue = `${id}-${item}`;
                     return (
                       <li key={keyValue} className="property__inside-item">
@@ -121,25 +126,25 @@ function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={owner.avatar} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={offer?.owner.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {owner.name}
+                    {offer?.owner.name}
                   </span>
                   <span className="property__user-status">
-                    {owner.statusPro ? 'Pro' : ''}
+                    {offer?.owner.statusPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    {description}
+                    {offer?.description}
                   </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer?.reviews.length}</span></h2>
                 <ul className="reviews__list">
-                  {reviews.map((review, id) => {
+                  {offer?.reviews.map((review, id) => {
                     const keyValue = `${id}-${review.name}`;
                     return (
                       <li key={keyValue} className="reviews__item">
@@ -148,41 +153,41 @@ function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
                     );
                   })}
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
+                <form className="reviews__form form" action="/" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
                     <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
                     <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="/icon-star"></use>
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
                     <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="/icon-star"></use>
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
                     <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="/icon-star"></use>
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
                     <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="/icon-star"></use>
                       </svg>
                     </label>
 
                     <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
                     <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
                       <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
+                        <use xlinkHref="/icon-star"></use>
                       </svg>
                     </label>
                   </div>
@@ -203,9 +208,101 @@ function OfferCardPage({offer}: OfferCardPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferCard offer={offer} key={1} />
-              <OfferCard offer={offer} key={2} />
-              <OfferCard offer={offer} key={3} />
+              <article className="near-places__card place-card">
+                <div className="near-places__image-wrapper place-card__image-wrapper">
+                  <a href="/">
+                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Placeimage" />
+                  </a>
+                </div>
+                <div className="place-card__info">
+                  <div className="place-card__price-wrapper">
+                    <div className="place-card__price">
+                      <b className="place-card__price-value">&euro;80</b>
+                      <span className="place-card__price-text">&/47;&nbsp;night</span>
+                    </div>
+                  </div>
+                  <div className="place-card__rating rating">
+                    <div className="place-card__stars rating__stars">
+                      <span
+                        style={{
+                          width: '80%'
+                        }}
+                      >
+                      </span>
+                      <span className="visually-hidden">Rating</span>
+                    </div>
+                  </div>
+                  <h2 className="place-card__name">
+                    <a href="/">Wood and stone place</a>
+                  </h2>
+                  <p className="place-card__type">Private room</p>
+                </div>
+              </article>
+
+              <article className="near-places__card place-card">
+                <div className="near-places__image-wrapper place-card__image-wrapper">
+                  <a href="/">
+                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Placeimage" />
+                  </a>
+                </div>
+                <div className="place-card__info">
+                  <div className="place-card__price-wrapper">
+                    <div className="place-card__price">
+                      <b className="place-card__price-value">&euro;132</b>
+                      <span className="place-card__price-text">&/47;&nbsp;night</span>
+                    </div>
+                  </div>
+                  <div className="place-card__rating rating">
+                    <div className="place-card__stars rating__stars">
+                      <span
+                        style={{
+                          width: '80%'
+                        }}
+                      >
+                      </span>
+                      <span className="visually-hidden">Rating</span>
+                    </div>
+                  </div>
+                  <h2 className="place-card__name">
+                    <a href="/">Canal View Prinsengracht</a>
+                  </h2>
+                  <p className="place-card__type">Apartment</p>
+                </div>
+              </article>
+
+              <article className="near-places__card place-card">
+                <div className="place-card__mark">
+                  <span>Premium</span>
+                </div>
+                <div className="near-places__image-wrapper place-card__image-wrapper">
+                  <a href="/">
+                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Placeimage" />
+                  </a>
+                </div>
+                <div className="place-card__info">
+                  <div className="place-card__price-wrapper">
+                    <div className="place-card__price">
+                      <b className="place-card__price-value">&euro;180</b>
+                      <span className="place-card__price-text">&/47;&nbsp;night</span>
+                    </div>
+                  </div>
+                  <div className="place-card__rating rating">
+                    <div className="place-card__stars rating__stars">
+                      <span
+                        style={{
+                          width: '80%'
+                        }}
+                      >
+                      </span>
+                      <span className="visually-hidden">Rating</span>
+                    </div>
+                  </div>
+                  <h2 className="place-card__name">
+                    <a href="/">Nice, cozy, warm big bed apartment</a>
+                  </h2>
+                  <p className="place-card__type">Apartment</p>
+                </div>
+              </article>
             </div>
           </section>
         </div>

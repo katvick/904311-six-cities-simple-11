@@ -15,8 +15,6 @@ type AppProps = {
 }
 
 function App({countRentOffers, offers}: AppProps): JSX.Element {
-  const offer = offers[2];
-
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -31,7 +29,7 @@ function App({countRentOffers, offers}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.OfferCard}
-            element={<OfferCardPage offer={offer} />}
+            element={<OfferCardPage offers={offers} />}
           />
           <Route
             path="*"

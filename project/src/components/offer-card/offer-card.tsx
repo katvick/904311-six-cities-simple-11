@@ -3,10 +3,9 @@ import { Offer } from '../../types/mocks';
 
 type OfferCardProps = {
   offer: Offer;
-  key: number;
 }
 
-function OfferCard({offer, key}: OfferCardProps): JSX.Element {
+function OfferCard({offer}: OfferCardProps): JSX.Element {
   const {
     id,
     photos,
@@ -20,10 +19,13 @@ function OfferCard({offer, key}: OfferCardProps): JSX.Element {
   const linkOfferCard = `/offer/${id}`;
 
   return (
-    <article key={key} className="cities__card place-card">
-      <div className="place-card__mark">
-        <span>{premium ? 'Premium' : ''}</span>
-      </div>
+    <>
+      {premium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : ''}
+
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={linkOfferCard}>
           <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Placeimage" />
@@ -53,7 +55,7 @@ function OfferCard({offer, key}: OfferCardProps): JSX.Element {
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
-    </article>
+    </>
   );
 }
 
