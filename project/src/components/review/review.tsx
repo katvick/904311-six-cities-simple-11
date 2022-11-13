@@ -15,7 +15,7 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
   } = review;
 
   return (
-    <>
+    <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
           <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar" />
@@ -41,7 +41,7 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
         </p>
         <time className="reviews__time" dateTime={dayjs(date).format('YYYY-MM-DD')}>{dayjs(date).format('MMMM YYYY')}</time>
       </div>
-    </>
+    </li>
   );
 }
 
