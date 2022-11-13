@@ -7,22 +7,13 @@ type ListOffersProps = {
 }
 
 function ListOffers({offers}: ListOffersProps): JSX.Element {
-  const [ , setOfferMouseOver] = useState(offers[0]);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => {
-        const keyValue = `${offer.id}-${offer.header}`;
-        return (
-          <article key={keyValue} className="cities__card place-card" onMouseOver={() => {
-            setOfferMouseOver(offer);
-            // console.log(offerMouseOver);
-          }}
-          >
-            <OfferCard offer={offer} />
-          </article>
-        );
-      })}
+    <div className="cities__places-list places__list tabs__content" data-active-card={activeCard}>
+      {offers.map((offer) => (
+        <OfferCard key={offer.id} offer={offer} setActiveCard={setActiveCard} />
+      ))}
     </div>
   );
 }

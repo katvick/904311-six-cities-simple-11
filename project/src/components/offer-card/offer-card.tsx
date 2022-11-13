@@ -3,9 +3,10 @@ import { Offer } from '../../types/mocks';
 
 type OfferCardProps = {
   offer: Offer;
+  setActiveCard: (id: number | null) => void;
 }
 
-function OfferCard({offer}: OfferCardProps): JSX.Element {
+function OfferCard({offer, setActiveCard}: OfferCardProps): JSX.Element {
   const {
     id,
     photos,
@@ -19,7 +20,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element {
   const linkOfferCard = `/offer/${id}`;
 
   return (
-    <>
+    <article className="cities__card place-card" onMouseEnter={() => setActiveCard(offer.id)} onMouseLeave={() => setActiveCard(null)}>
       {premium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -55,7 +56,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element {
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
-    </>
+    </article>
   );
 }
 
