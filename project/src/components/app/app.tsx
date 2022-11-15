@@ -4,29 +4,32 @@ import { AppRoute } from '../../const';
 
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
-import RoomPage from '../../pages/room-page/room-page';
+import OfferCardPage from '../../pages/offer-card-page/offer-card-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+
+import { Offers } from '../../types/mocks';
 
 type AppProps = {
   countRentOffers: number;
+  offers: Offers;
 }
 
-function App({countRentOffers}: AppProps): JSX.Element {
+function App({countRentOffers, offers}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
-            path={AppRoute.Root}
-            element={<MainPage countRentOffers={countRentOffers} />}
+            path={AppRoute.Main}
+            element={<MainPage countRentOffers={countRentOffers} offers={offers} />}
           />
           <Route
             path={AppRoute.Login}
             element={<LoginPage />}
           />
           <Route
-            path={AppRoute.Room}
-            element={<RoomPage />}
+            path={AppRoute.OfferCard}
+            element={<OfferCardPage offers={offers} />}
           />
           <Route
             path="*"

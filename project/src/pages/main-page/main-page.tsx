@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
-import CityCard from '../../components/sity-card/sity-card';
 import Logo from '../../components/logo/logo';
+import ListOffers from '../../components/list-offers/list-offers';
+import { Offers } from '../../types/mocks';
 
 type MainPageProps = {
   countRentOffers: number;
+  offers: Offers;
 }
 
-function MainPage({countRentOffers}: MainPageProps): JSX.Element {
+function MainPage({countRentOffers, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -94,13 +96,7 @@ function MainPage({countRentOffers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <CityCard />
-                <CityCard />
-                <CityCard />
-                <CityCard />
-                <CityCard />
-              </div>
+              <ListOffers offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
