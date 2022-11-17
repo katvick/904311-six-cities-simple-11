@@ -17,6 +17,8 @@ export type Offer = {
   id: number;
   city: string;
   header: string;
+  lat: number;
+  lng: number;
   photos: string[];
   description: string;
   premium: boolean;
