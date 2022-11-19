@@ -33,3 +33,9 @@ export type Offer = {
 };
 
 export type Offers = Offer[];
+
+export type City = {
+  title: string;
+  lat: number;
+  lng: number;
+}

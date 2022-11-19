@@ -7,21 +7,22 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferCardPage from '../../pages/offer-card-page/offer-card-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
-import { Offers } from '../../types/mocks';
+import { City, Offers } from '../../types/mocks';
 
 type AppProps = {
   countRentOffers: number;
   offers: Offers;
+  city: City;
 }
 
-function App({countRentOffers, offers}: AppProps): JSX.Element {
+function App({countRentOffers, offers, city}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage countRentOffers={countRentOffers} offers={offers} />}
+            element={<MainPage countRentOffers={countRentOffers} offers={offers} city={city} />}
           />
           <Route
             path={AppRoute.Login}
