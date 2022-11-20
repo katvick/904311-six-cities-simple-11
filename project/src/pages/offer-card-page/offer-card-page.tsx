@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import ReviewComponent from '../../components/review/review';
 import FormReview from '../../components/form-review/form-review';
 import { Offers } from '../../types/mocks';
+import ListReviews from '../../components/list-reviews/list-reviews';
 
 type OfferCardPageProps = {
   offers: Offers;
@@ -129,11 +129,7 @@ function OfferCardPage({offers}: OfferCardPageProps): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer?.reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {offer?.reviews.map((review) => (
-                    <ReviewComponent key={review.id} review={review}/>
-                  ))}
-                </ul>
+                <ListReviews offer={offer} />
                 <FormReview />
               </section>
             </div>
