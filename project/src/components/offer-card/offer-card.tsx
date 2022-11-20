@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/mocks';
+import { StyleOfferCard } from '../../types/common';
 
 type OfferCardProps = {
   offer: Offer;
   setActiveCard: (id: number | null) => void;
+  styleOfferCard: StyleOfferCard;
 }
 
-function OfferCard({offer, setActiveCard}: OfferCardProps): JSX.Element {
+function OfferCard({offer, setActiveCard, styleOfferCard}: OfferCardProps): JSX.Element {
   const {
     id,
     photos,
@@ -20,7 +22,7 @@ function OfferCard({offer, setActiveCard}: OfferCardProps): JSX.Element {
   const linkOfferCard = `/offer/${id}`;
 
   return (
-    <article className="cities__card place-card"
+    <article className={`${styleOfferCard.classArticle} place-card`}
       onMouseEnter={() => setActiveCard(offer.id)}
       onMouseLeave={() => setActiveCard(null)}
     >
@@ -30,7 +32,7 @@ function OfferCard({offer, setActiveCard}: OfferCardProps): JSX.Element {
         </div>
         : ''}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${styleOfferCard.classImageWrapper} place-card__image-wrapper`}>
         <Link to={linkOfferCard}>
           <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Placeimage" />
         </Link>

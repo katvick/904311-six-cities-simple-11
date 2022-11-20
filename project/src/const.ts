@@ -8,12 +8,24 @@ export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensi
 
 export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
-export const propertiesMainMap = {
-  className: 'cities__map',
-  height: '980px'
+export const PropertiesMap = {
+  Main: {
+    className: 'cities__map',
+    height: '980px'
+  },
+  OfferCard: {
+    className: 'property__map',
+    height: '579px'
+  }
 };
 
-export const propertiesOfferCardMap = {
-  className: 'property__map',
-  height: '579px'
+export const StyleOfferCard = {
+  CityOffer: {
+    classArticle: 'cities__card',
+    classImageWrapper: 'cities__image-wrapper'
+  },
+  NearOffer: {
+    classArticle: 'near-places__card',
+    classImageWrapper: 'near-places__image-wrapper'
+  }
 };
