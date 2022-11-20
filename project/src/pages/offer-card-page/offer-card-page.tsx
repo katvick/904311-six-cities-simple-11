@@ -2,14 +2,17 @@ import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import FormReview from '../../components/form-review/form-review';
-import { Offers } from '../../types/mocks';
+import { Offers, City } from '../../types/mocks';
 import ListReviews from '../../components/list-reviews/list-reviews';
+import Map from '../../components/map/map';
+import { propertiesOfferCardMap } from '../../const';
 
 type OfferCardPageProps = {
   offers: Offers;
+  city: City;
 }
 
-function OfferCardPage({offers}: OfferCardPageProps): JSX.Element {
+function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
   const params = useParams();
   const offer = offers.find((item) => String(item.id) === params.id);
 
@@ -134,7 +137,11 @@ function OfferCardPage({offers}: OfferCardPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            offers={offers.slice(0, 3)}
+            city={city}
+            propertiesMap={propertiesOfferCardMap}
+          />
         </section>
         <div className="container">
           <section className="near-places places">

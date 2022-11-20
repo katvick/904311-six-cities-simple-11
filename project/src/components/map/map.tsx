@@ -3,12 +3,14 @@ import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import { Offer, Offers, City } from '../../types/mocks';
+import { PropertiesMap } from '../../types/common';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {
   offers: Offers;
   city: City;
-  selectedOffer: Offer | undefined;
+  propertiesMap: PropertiesMap;
+  selectedOffer?: Offer | undefined;
 }
 
 const defaultIcon = new Icon({
@@ -23,7 +25,7 @@ const currentIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({offers, city, selectedOffer}: MapProps): JSX.Element {
+function Map({offers, city, propertiesMap, selectedOffer}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -47,13 +49,11 @@ function Map({offers, city, selectedOffer}: MapProps): JSX.Element {
   }, [map, offers, selectedOffer]);
 
   return (
-    <div className="cities__right-section">
-      <section className="cities__map map"
-        style={{height: '980px'}}
-        ref={mapRef}
-      >
-      </section>
-    </div>
+    <section className={`${propertiesMap.className} map`}
+      style={{height: propertiesMap.height}}
+      ref={mapRef}
+    >
+    </section>
   );
 }
 

@@ -30,7 +30,7 @@ function App({countRentOffers, offers, city}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.OfferCard}
-            element={<OfferCardPage offers={offers} />}
+            element={<OfferCardPage offers={offers} city={city} />}
           />
           <Route
             path="*"

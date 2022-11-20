@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
-import { City, Offers, Offer } from '../../types/mocks';
 import Map from '../../components/map/map';
+import { City, Offers, Offer } from '../../types/mocks';
+import { propertiesMainMap } from '../../const';
 
 type MainPageProps = {
   countRentOffers: number;
@@ -109,7 +110,14 @@ function MainPage({countRentOffers, offers, city}: MainPageProps): JSX.Element {
               </form>
               <ListOffers offers={offers} onListOffersHover={onListOffersHover} />
             </section>
-            <Map offers={offers} city={city} selectedOffer={selectedOffer} />
+            <div className="cities__right-section">
+              <Map
+                offers={offers}
+                city={city}
+                propertiesMap={propertiesMainMap}
+                selectedOffer={selectedOffer}
+              />
+            </div>
           </div>
         </div>
       </main>
