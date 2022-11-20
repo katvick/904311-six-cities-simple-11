@@ -20,7 +20,10 @@ function OfferCard({offer, setActiveCard}: OfferCardProps): JSX.Element {
   const linkOfferCard = `/offer/${id}`;
 
   return (
-    <article className="cities__card place-card" onMouseEnter={() => setActiveCard(offer.id)} onMouseLeave={() => setActiveCard(null)}>
+    <article className="cities__card place-card"
+      onMouseEnter={() => setActiveCard(offer.id)}
+      onMouseLeave={() => setActiveCard(null)}
+    >
       {premium ?
         <div className="place-card__mark">
           <span>Premium</span>

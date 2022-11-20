@@ -1,14 +1,25 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
-import { Offers } from '../../types/mocks';
+import { City, Offers, Offer } from '../../types/mocks';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   countRentOffers: number;
   offers: Offers;
+  city: City;
 }
 
-function MainPage({countRentOffers, offers}: MainPageProps): JSX.Element {
+function MainPage({countRentOffers, offers, city}: MainPageProps): JSX.Element {
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(undefined);
+
+  const onListOffersHover = (listOfferId: number | null) => {
+    const currentOffer = offers.find((offer) => offer.id === listOfferId);
+
+    setSelectedOffer(currentOffer);
+  };
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -96,11 +107,9 @@ function MainPage({countRentOffers, offers}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <ListOffers offers={offers}/>
+              <ListOffers offers={offers} onListOffersHover={onListOffersHover} />
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <Map offers={offers} city={city} selectedOffer={selectedOffer} />
           </div>
         </div>
       </main>
