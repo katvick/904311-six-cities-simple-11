@@ -10,7 +10,7 @@ type MapProps = {
   offers: Offers;
   city: City;
   propertiesMap: PropertiesMap;
-  selectedOffer?: Offer | undefined;
+  selectedOffer?: Offer;
 }
 
 const defaultIcon = new Icon({

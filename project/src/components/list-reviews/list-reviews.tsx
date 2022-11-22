@@ -2,7 +2,7 @@ import { Offer } from '../../types/mocks';
 import ReviewComponent from '../review/review';
 
 type ListReviewsProps = {
-  offer: Offer | undefined;
+  offer?: Offer;
 }
 
 function ListReviews({offer}: ListReviewsProps): JSX.Element {
