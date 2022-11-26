@@ -29,3 +29,12 @@ export const StyleOfferCard = {
     classImageWrapper: 'near-places__image-wrapper'
   }
 };
+
+export const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf'
+];
