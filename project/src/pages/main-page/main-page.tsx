@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
-import { City, Offers, Offer } from '../../types/mocks';
 import Map from '../../components/map/map';
+
+import { City, Offers, Offer } from '../../types/mocks';
+import { PropertiesMap, StyleOfferCard } from '../../const';
 
 type MainPageProps = {
   countRentOffers: number;
@@ -107,9 +110,20 @@ function MainPage({countRentOffers, offers, city}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <ListOffers offers={offers} onListOffersHover={onListOffersHover} />
+              <ListOffers
+                offers={offers}
+                onListOffersHover={onListOffersHover}
+                styleOfferCard={StyleOfferCard.CityOffer}
+              />
             </section>
-            <Map offers={offers} city={city} selectedOffer={selectedOffer} />
+            <div className="cities__right-section">
+              <Map
+                offers={offers}
+                city={city}
+                propertiesMap={PropertiesMap.Main}
+                selectedOffer={selectedOffer}
+              />
+            </div>
           </div>
         </div>
       </main>
