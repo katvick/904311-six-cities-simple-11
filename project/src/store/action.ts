@@ -1,6 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offers } from '../types/mocks';
 
-export const changeCity = createAction('changeCity', (city: string) => ({ payload: city }));
+export const changeCity = createAction<{city: string}>('changeCity');
 
-export const fillListOffer = createAction('fillListOffer', (offers: Offers) => ({ payload: offers }));
+export const fillListOffer = createAction('fillListOffer');

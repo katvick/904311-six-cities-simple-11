@@ -5,11 +5,11 @@ import { StyleOfferCard } from '../../types/common';
 
 type ListOffersProps = {
   offers: Offers;
-  onListOffersHover: (listOfferId: number | null) => void;
   styleOfferCard: StyleOfferCard;
+  onListOffersHover: (listOfferId: number | null) => void;
 }
 
-function ListOffers({offers, onListOffersHover, styleOfferCard}: ListOffersProps): JSX.Element {
+function ListOffers({offers, styleOfferCard, onListOffersHover}: ListOffersProps): JSX.Element {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   onListOffersHover(activeCard);
