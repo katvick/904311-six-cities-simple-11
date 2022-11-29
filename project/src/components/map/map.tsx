@@ -31,6 +31,10 @@ function Map({offers, city, propertiesMap, selectedOffer}: MapProps): JSX.Elemen
 
   useEffect(() => {
     if (map) {
+      map.setView(
+        [city.lat, city.lng],
+        12
+      );
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.lat,
@@ -46,7 +50,7 @@ function Map({offers, city, propertiesMap, selectedOffer}: MapProps): JSX.Elemen
           .addTo(map);
       });
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, city, offers, selectedOffer]);
 
   return (
     <section className={`${propertiesMap.className} map`}

@@ -41,10 +41,10 @@ export const offers: Offer[] = [
   },
   {
     id: 2,
-    city: 'Amsterdam',
+    city: 'Paris',
     header: 'Wood and stone place',
-    lat: 52.3609553943508,
-    lng: 4.85309666406198,
+    lat: 48.8534100,
+    lng: 2.3488000,
     photos: [
       '/img/room.jpg',
       '/img/apartment-02.jpg',
@@ -77,10 +77,10 @@ export const offers: Offer[] = [
   },
   {
     id: 3,
-    city: 'Amsterdam',
+    city: 'Cologne',
     header: 'Canal View Prinsengracht',
-    lat: 52.3909553943508,
-    lng: 4.929309666406198,
+    lat: 50.9333300,
+    lng: 6.9500000,
     photos: [
       '/img/apartment-03.jpg',
       '/img/apartment-02.jpg',
