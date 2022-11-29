@@ -4,7 +4,7 @@ import { changeCity, fillListOffer } from './action';
 
 const initialState = {
   city: 'Paris',
-  offers: offers.filter((offer) => offer.city === 'Paris'),
+  offers: offers.filter((offer) => offer.city === 'Paris')
 };
 
 const reducer = createReducer(initialState, (builder) => {
