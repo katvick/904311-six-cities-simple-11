@@ -4,9 +4,9 @@ export enum AppRoute {
   OfferCard = '/offer/:id'
 }
 
-export const URL_MARKER_DEFAULT = './img/pin.svg';
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
-export const URL_MARKER_CURRENT = './img/pin-active.svg';
+export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export const PropertiesMap = {
   Main: {
