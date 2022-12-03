@@ -18,10 +18,12 @@ type MainPageProps = {
 
 function MainPage({cities}: MainPageProps): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.sortedOffers);
   const activeSort = useAppSelector((state) => state.sort);
 
   const dispatch = useAppDispatch();
+
+  const currentOffers = offers.filter((offer) => offer.city === activeCity);
 
   const changeCityHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
     const target = evt.target as HTMLLIElement;
@@ -42,7 +44,7 @@ function MainPage({cities}: MainPageProps): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(undefined);
 
   const onListOffersHover = (listOfferId: number | null) => {
-    const currentOffer = offers.find((offer) => offer.id === listOfferId);
+    const currentOffer = currentOffers.find((offer) => offer.id === listOfferId);
 
     setSelectedOffer(currentOffer);
   };
@@ -87,19 +89,19 @@ function MainPage({cities}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+              <b className="places__found">{currentOffers.length} places to stay in {activeCity}</b>
               <SortOptions
                 sortType={activeSort}
                 changeSortHandle={changeSortHandle}
               />
               <ListOffers
-                offers={offers}
+                offers={currentOffers}
                 styleOfferCard={StyleOfferCard.CityOffer}
                 onListOffersHover={onListOffersHover}
               />
             </section>
             <div className="cities__right-section">
-              <Map offers={offers} city={activeCityData} propertiesMap={PropertiesMap.Main} selectedOffer={selectedOffer} />
+              <Map offers={currentOffers} city={activeCityData} propertiesMap={PropertiesMap.Main} selectedOffer={selectedOffer} />
             </div>
           </div>
         </div>

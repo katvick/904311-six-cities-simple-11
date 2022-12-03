@@ -7,12 +7,14 @@ import { sortByType } from '../utils/sort';
 // type State = {
 //   city: string;
 //   offers: Offers | null;
+//   sortedOffers: Offers;
 //   sort: string;
 // }
 
 const initialState = {
   city: 'Paris',
-  offers: offers.filter((offer) => offer.city === 'Paris'),
+  offers: offers,
+  sortedOffers: offers,
   sort: 'Popular'
 };
 
@@ -22,13 +24,13 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload.city;
     })
     .addCase(fillListOffer, (state) => {
-      state.offers = offers.filter((offer) => offer.city === state.city);
+      state.sortedOffers = offers.filter((offer) => offer.city === state.city);
     })
     .addCase(changeSort, (state, action) => {
       state.sort = action.payload.sort;
     })
     .addCase(sortOffers, (state) => {
-      state.offers = sortByType(state.offers, state.sort);
+      state.sortedOffers = sortByType(state.offers, state.sortedOffers, state.sort);
     });
 });
 
