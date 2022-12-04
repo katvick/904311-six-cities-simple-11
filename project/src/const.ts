@@ -4,9 +4,9 @@ export enum AppRoute {
   OfferCard = '/offer/:id'
 }
 
-export const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
-export const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export const PropertiesMap = {
   Main: {
@@ -28,4 +28,11 @@ export const StyleOfferCard = {
     classArticle: 'near-places__card',
     classImageWrapper: 'near-places__image-wrapper'
   }
+};
+
+export const SortType = {
+  POPULAR: 'Popular',
+  PRICE_LOW_TO_HIGH: 'Price: low to high',
+  PRICE_HIGH_TO_LOW: 'Price: high to low',
+  TOP_RATED_FIRST: 'Top rated first',
 };
