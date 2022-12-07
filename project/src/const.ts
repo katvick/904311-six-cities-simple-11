@@ -36,3 +36,9 @@ export const SortType = {
   PRICE_HIGH_TO_LOW: 'Price: high to low',
   TOP_RATED_FIRST: 'Top rated first',
 };
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
