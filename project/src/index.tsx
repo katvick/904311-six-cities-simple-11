@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-// import { offers } from './mocks/offers';
-// import { cities } from './mocks/cities';
+import ErrorMesage from './components/error-mesage/error-mesage';
 import { store } from './store';
 
 const root = ReactDOM.createRoot(
@@ -13,6 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ErrorMesage />
       <App
         offers = {offers}
         city = {cities[3]}
