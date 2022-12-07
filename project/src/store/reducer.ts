@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
-import { changeCity, fillListOffer, changeSort, sortOffers } from './action';
+import { changeCity, fillListOffer, changeSort, sortOffers, loadOffers } from './action';
 import { sortByType } from '../utils/sort';
 // import { Offers } from '../types/mocks';
 
@@ -31,6 +31,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(sortOffers, (state) => {
       state.sortedOffers = sortByType(state.offers, state.sortedOffers, state.sort);
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     });
 });
 
