@@ -1,4 +1,4 @@
-import { Offer } from '../../types/mocks';
+import { Offer } from '../../types/data';
 import ReviewComponent from '../review/review';
 
 type ListReviewsProps = {

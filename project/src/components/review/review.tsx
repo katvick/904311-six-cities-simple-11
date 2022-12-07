@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Review } from '../../types/mocks';
+import { Review } from '../../types/data';
 
 type ReviewComponentProps = {
   review: Review;

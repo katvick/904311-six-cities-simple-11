@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, fillListOffer, changeSort, sortOffers, loadOffers, requireAuthorization } from './action';
 import { sortByType } from '../utils/sort';
 import { AuthorizationStatus } from '../const';
-import { Offers } from '../types/mocks';
+import { Offers } from '../types/data';
 
 type InitialState = {
   city: string;

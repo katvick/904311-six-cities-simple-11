@@ -7,7 +7,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import OfferCardPage from '../../pages/offer-card-page/offer-card-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
-import { City, Cities, Offers } from '../../types/mocks';
+import { City, Cities, Offers } from '../../types/data';
 
 type AppProps = {
   offers: Offers;

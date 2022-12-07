@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cities } from '../../types/mocks';
+import { Cities } from '../../types/data';
 import CityItem from '../city-item/city-item';
 
 type ListCitiesProps = {

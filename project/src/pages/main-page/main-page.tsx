@@ -9,7 +9,7 @@ import Map from '../../components/map/map';
 import ListCities from '../../components/list-cities/list-cities';
 import SortOptions from '../../components/sort/sort';
 
-import { Cities, Offer } from '../../types/mocks';
+import { Cities, Offer } from '../../types/data';
 import { PropertiesMap, StyleOfferCard } from '../../const';
 
 type MainPageProps = {

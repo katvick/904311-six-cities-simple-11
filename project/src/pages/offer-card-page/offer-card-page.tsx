@@ -9,7 +9,7 @@ import Map from '../../components/map/map';
 import ListOffers from '../../components/list-offers/list-offers';
 
 import { PropertiesMap, StyleOfferCard } from '../../const';
-import { Offers, City, Offer } from '../../types/mocks';
+import { Offers, City, Offer } from '../../types/data';
 
 
 type OfferCardPageProps = {

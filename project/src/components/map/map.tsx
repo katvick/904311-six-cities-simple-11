@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import { Offer, Offers, City } from '../../types/mocks';
+import { Offer, Offers, City } from '../../types/data';
 import { PropertiesMap } from '../../types/common';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
