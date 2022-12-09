@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
@@ -8,19 +8,19 @@ import ListCities from '../../components/list-cities/list-cities';
 import SortOptions from '../../components/sort/sort';
 
 import { PropertiesMap, StyleOfferCard } from '../../const';
-import { fetchOffersAction } from '../../store/api-actions';
-import { useEffect } from 'react';
+// import { fetchOffersAction } from '../../store/api-actions';
+// import { useEffect } from 'react';
 
 function MainPage(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.sortedOffers);
   const activeSort = useAppSelector((state) => state.sort);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchOffersAction());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchOffersAction());
+  // }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">
