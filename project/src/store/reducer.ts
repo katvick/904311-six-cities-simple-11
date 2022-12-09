@@ -1,21 +1,47 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
-import { changeCity, fillListOffer, changeSort, sortOffers } from './action';
+import {
+  changeCity,
+  fillListOffer,
+  changeSort,
+  sortOffers,
+  loadOffers,
+  loadReviews,
+  setDataLoadingStatus,
+  requireAuthorization,
+  setError,
+  setActiveOffer,
+  loadSelectedOffer,
+  loadNearbyOffers, } from './action';
 import { sortByType } from '../utils/sort';
-// import { Offers } from '../types/mocks';
+import { AuthorizationStatus, SortType } from '../const';
+import { Offer, Offers, Reviews } from '../types/data';
 
-// type State = {
-//   city: string;
-//   offers: Offers | null;
-//   sortedOffers: Offers;
-//   sort: string;
-// }
+type InitialState = {
+  city: string;
+  offers: Offers;
+  sortedOffers: Offers;
+  activeOffer: Offer | null;
+  selectedOffer: Offer | null;
+  nearbyOffers: Offers;
+  reviews: Reviews;
+  sort: string;
+  authorizationStatus: string;
+  isDataLoading: boolean;
+  error: string | null;
+}
 
-const initialState = {
+const initialState: InitialState = {
   city: 'Paris',
-  offers: offers,
-  sortedOffers: offers,
-  sort: 'Popular'
+  offers: [],
+  sortedOffers: [],
+  activeOffer: null,
+  selectedOffer: null,
+  nearbyOffers: [],
+  reviews: [],
+  sort: SortType.POPULAR,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoading: false,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -24,13 +50,37 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload.city;
     })
     .addCase(fillListOffer, (state) => {
-      state.sortedOffers = offers.filter((offer) => offer.city === state.city);
+      state.sortedOffers = state.offers.filter(({city}) => city.name === state.city);
+    })
+    .addCase(setActiveOffer, (state, action) => {
+      state.activeOffer = action.payload;
     })
     .addCase(changeSort, (state, action) => {
       state.sort = action.payload.sort;
     })
     .addCase(sortOffers, (state) => {
       state.sortedOffers = sortByType(state.offers, state.sortedOffers, state.sort);
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(loadNearbyOffers, (state, action) => {
+      state.nearbyOffers = action.payload;
+    })
+    .addCase(loadSelectedOffer, (state, action) => {
+      state.selectedOffer = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 

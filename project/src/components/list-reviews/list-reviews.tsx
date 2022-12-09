@@ -1,17 +1,22 @@
-import { Offer } from '../../types/mocks';
-import ReviewComponent from '../review/review';
+import { Reviews } from '../../types/data';
+import FormReview from '../form-review/form-review';
+import ReviewItem from '../review/review-item';
 
 type ListReviewsProps = {
-  offer?: Offer;
+  reviews: Reviews;
 }
 
-function ListReviews({offer}: ListReviewsProps): JSX.Element {
+function ListReviews({reviews}: ListReviewsProps): JSX.Element {
   return (
-    <ul className="reviews__list">
-      {offer?.reviews.map((review) => (
-        <ReviewComponent key={review.id} review={review}/>
-      ))}
-    </ul>
+    <section className="property__reviews reviews">
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <ul className="reviews__list">
+        {reviews.map((review) => (
+          <ReviewItem key={review.id} review={review}/>
+        ))}
+      </ul>
+      <FormReview />
+    </section>
   );
 }
 

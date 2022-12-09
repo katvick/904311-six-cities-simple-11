@@ -1,21 +1,24 @@
+import { useAppDispatch } from '../../hooks';
+import { setActiveOffer } from '../../store/action';
 import { Link } from 'react-router-dom';
-import { Offer } from '../../types/mocks';
+import { Offer } from '../../types/data';
 import { StyleOfferCard } from '../../types/common';
 
 type OfferCardProps = {
   offer: Offer;
-  setActiveCard: (id: number | null) => void;
   styleOfferCard: StyleOfferCard;
 }
 
-function OfferCard({offer, setActiveCard, styleOfferCard}: OfferCardProps): JSX.Element {
+function OfferCard({offer, styleOfferCard}: OfferCardProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const {
     id,
-    photos,
-    premium,
+    previewImage,
+    isPremium,
     price,
     rating,
-    header,
+    title,
     type
   } = offer;
 
@@ -23,10 +26,10 @@ function OfferCard({offer, setActiveCard, styleOfferCard}: OfferCardProps): JSX.
 
   return (
     <article className={`${styleOfferCard.classArticle} place-card`}
-      onMouseEnter={() => setActiveCard(offer.id)}
-      onMouseLeave={() => setActiveCard(null)}
+      onMouseEnter={() => dispatch(setActiveOffer(offer))}
+      onMouseLeave={() => dispatch(setActiveOffer(null))}
     >
-      {premium ?
+      {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -34,7 +37,7 @@ function OfferCard({offer, setActiveCard, styleOfferCard}: OfferCardProps): JSX.
 
       <div className={`${styleOfferCard.classImageWrapper} place-card__image-wrapper`}>
         <Link to={linkOfferCard}>
-          <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Placeimage" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Placeimage" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -57,7 +60,7 @@ function OfferCard({offer, setActiveCard, styleOfferCard}: OfferCardProps): JSX.
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={linkOfferCard}>{header}</a>
+          <a href={linkOfferCard}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

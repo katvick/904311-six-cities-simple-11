@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { changeCity, fillListOffer, changeSort, sortOffers } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 
 import Logo from '../../components/logo/logo';
 import ListOffers from '../../components/list-offers/list-offers';
@@ -9,45 +7,20 @@ import Map from '../../components/map/map';
 import ListCities from '../../components/list-cities/list-cities';
 import SortOptions from '../../components/sort/sort';
 
-import { Cities, Offer } from '../../types/mocks';
 import { PropertiesMap, StyleOfferCard } from '../../const';
+// import { fetchOffersAction } from '../../store/api-actions';
+// import { useEffect } from 'react';
 
-type MainPageProps = {
-  cities: Cities;
-}
-
-function MainPage({cities}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.sortedOffers);
   const activeSort = useAppSelector((state) => state.sort);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const currentOffers = offers.filter((offer) => offer.city === activeCity);
-
-  const changeCityHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
-    const target = evt.target as HTMLLIElement;
-    dispatch(changeCity({city: target.innerText}));
-    dispatch(fillListOffer());
-  };
-
-  const changeSortHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
-    const target = evt.target as HTMLLIElement;
-    dispatch(changeSort({sort: target.innerText}));
-    dispatch(sortOffers());
-  };
-
-  const activeCityData = cities.filter((city) => city.title === activeCity)[0];
-
-  //
-
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(undefined);
-
-  const onListOffersHover = (listOfferId: number | null) => {
-    const currentOffer = currentOffers.find((offer) => offer.id === listOfferId);
-
-    setSelectedOffer(currentOffer);
-  };
+  // useEffect(() => {
+  //   dispatch(fetchOffersAction());
+  // }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">
@@ -80,29 +53,25 @@ function MainPage({cities}: MainPageProps): JSX.Element {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <ListCities
-          cities={cities}
-          activeCity={activeCity}
-          changeCityHandle={changeCityHandle}
-        />
+
+        <ListCities activeCity={activeCity} />
+
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers.length} places to stay in {activeCity}</b>
-              <SortOptions
-                sortType={activeSort}
-                changeSortHandle={changeSortHandle}
-              />
-              <ListOffers
-                offers={currentOffers}
-                styleOfferCard={StyleOfferCard.CityOffer}
-                onListOffersHover={onListOffersHover}
-              />
+              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+
+              <SortOptions sortType={activeSort} />
+
+              <ListOffers offers={offers} styleOfferCard={StyleOfferCard.CityOffer} />
+
             </section>
+
             <div className="cities__right-section">
-              <Map offers={currentOffers} city={activeCityData} propertiesMap={PropertiesMap.Main} selectedOffer={selectedOffer} />
+              <Map offers={offers} propertiesMap={PropertiesMap.Main} />
             </div>
+
           </div>
         </div>
       </main>

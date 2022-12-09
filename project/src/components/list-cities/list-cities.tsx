@@ -1,25 +1,36 @@
 import React from 'react';
-import { Cities } from '../../types/mocks';
+import { useAppDispatch } from '../../hooks';
+import { changeCity, fillListOffer } from '../../store/action';
 import CityItem from '../city-item/city-item';
+import { CITIES } from '../../const';
 
 type ListCitiesProps = {
-  cities: Cities;
   activeCity: string;
-  changeCityHandle: (evt: React.MouseEvent<HTMLUListElement>) => void;
 }
 
-function ListCities({cities, activeCity, changeCityHandle}: ListCitiesProps): JSX.Element {
+function ListCities({activeCity}: ListCitiesProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const changeCityHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
+    const target = evt.target as HTMLLIElement;
+    dispatch(changeCity({city: target.innerText}));
+    dispatch(fillListOffer());
+  };
+
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list" onClick={changeCityHandle}>
-          {cities.map((city) => (
-            <CityItem
-              key={city.id}
-              city={city.title}
-              activeCity={activeCity}
-            />
-          ))}
+          {CITIES.map((city, id) => {
+            const keyValue = `${id}-city`;
+            return (
+              <CityItem
+                key={keyValue}
+                city={city}
+                activeCity={activeCity}
+              />
+            );
+          })}
         </ul>
       </section>
     </div>

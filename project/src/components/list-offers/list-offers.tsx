@@ -1,23 +1,17 @@
-import { useState } from 'react';
 import OfferCard from '../offer-card/offer-card';
-import { Offers } from '../../types/mocks';
+import { Offers } from '../../types/data';
 import { StyleOfferCard } from '../../types/common';
 
 type ListOffersProps = {
   offers: Offers;
   styleOfferCard: StyleOfferCard;
-  onListOffersHover: (listOfferId: number | null) => void;
 }
 
-function ListOffers({offers, styleOfferCard, onListOffersHover}: ListOffersProps): JSX.Element {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-
-  onListOffersHover(activeCard);
-
+function ListOffers({offers, styleOfferCard}: ListOffersProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content" data-active-card={activeCard}>
+    <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <OfferCard key={offer.id} offer={offer} setActiveCard={setActiveCard} styleOfferCard={styleOfferCard} />
+        <OfferCard key={offer.id} offer={offer} styleOfferCard={styleOfferCard} />
       ))}
     </div>
   );
