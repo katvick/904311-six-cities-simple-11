@@ -1,4 +1,4 @@
-import { createBrowserHistory } from '@remix-run/router';
+import { createBrowserHistory } from 'history';
 
 const browserHistory = createBrowserHistory();
 
