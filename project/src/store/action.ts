@@ -1,18 +1,21 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offers, Reviews } from '../types/data';
+import { Offer, Offers, Reviews } from '../types/data';
 import { AuthorizationStatus } from '../const';
 
 export const changeCity = createAction<{city: string}>('changeCity');
 
 export const fillListOffer = createAction('fillListOffer');
+export const setActiveOffer = createAction<Offer | null>('setActiveOffer');
 
 export const changeSort = createAction<{sort: string}>('changeSort');
-
 export const sortOffers = createAction('sortOffers');
 
 export const loadOffers = createAction<Offers>('data/loadOffers');
-
+export const loadNearbyOffers = createAction<Offers>('data/loadNearbyOffers');
+export const loadSelectedOffer = createAction<Offer | null>('loadSelectedOffer');
 export const loadReviews = createAction<Reviews>('data/loadReviews');
+
+export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 

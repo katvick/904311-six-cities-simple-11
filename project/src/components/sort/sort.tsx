@@ -1,11 +1,20 @@
+import { useAppDispatch } from '../../hooks';
+import { changeSort, sortOffers } from '../../store/action';
 import { SortType } from '../../const';
 
 type SortOptionsProps = {
   sortType: string;
-  changeSortHandle: (evt: React.MouseEvent<HTMLUListElement>) => void;
 }
 
-function SortOptions({sortType, changeSortHandle}: SortOptionsProps): JSX.Element {
+function SortOptions({sortType}: SortOptionsProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const changeSortHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
+    const target = evt.target as HTMLLIElement;
+    dispatch(changeSort({sort: target.innerText}));
+    dispatch(sortOffers());
+  };
+
   return (
     <form className="places__sorting" action="/" method="get">
       <span className="places__sorting-caption">Sort by</span>

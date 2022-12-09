@@ -51,3 +51,12 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const CITIES = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];

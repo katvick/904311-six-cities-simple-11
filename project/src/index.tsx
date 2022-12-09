@@ -16,11 +16,7 @@ root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <ErrorMesage />
-      <App
-        offers = {offers}
-        city = {cities[3]}
-        cities={cities}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

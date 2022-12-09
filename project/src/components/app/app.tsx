@@ -1,28 +1,32 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 import MainPage from '../../pages/main-page/main-page';
 import LoginPage from '../../pages/login-page/login-page';
 import OfferCardPage from '../../pages/offer-card-page/offer-card-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import LoadingPage from '../../pages/loading-page/loading-page';
 
-import { City, Cities, Offers } from '../../types/data';
+import { useAppSelector } from '../../hooks';
 
-type AppProps = {
-  offers: Offers;
-  city: City;
-  cities: Cities;
-}
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
 
-function App({offers, city, cities}: AppProps): JSX.Element {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+    return (
+      <LoadingPage />
+    );
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage cities={cities}/>}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}
@@ -30,7 +34,7 @@ function App({offers, city, cities}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.OfferCard}
-            element={<OfferCardPage offers={offers} city={city} />}
+            element={<OfferCardPage />}
           />
           <Route
             path="*"

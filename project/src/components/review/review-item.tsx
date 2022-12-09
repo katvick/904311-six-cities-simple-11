@@ -1,27 +1,26 @@
 import dayjs from 'dayjs';
 import { Review } from '../../types/data';
 
-type ReviewComponentProps = {
+type ReviewItemProps = {
   review: Review;
 }
 
-function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
+function ReviewItem({review}: ReviewItemProps): JSX.Element {
   const {
-    avatar,
-    name,
+    comment,
     rating,
     date,
-    reviewText
+    user
   } = review;
 
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {name}
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
@@ -37,7 +36,7 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
           </div>
         </div>
         <p className="reviews__text">
-          {reviewText}
+          {comment}
         </p>
         <time className="reviews__time" dateTime={dayjs(date).format('YYYY-MM-DD')}>{dayjs(date).format('MMMM YYYY')}</time>
       </div>
@@ -45,4 +44,4 @@ function ReviewComponent({review}: ReviewComponentProps): JSX.Element {
   );
 }
 
-export default ReviewComponent;
+export default ReviewItem;

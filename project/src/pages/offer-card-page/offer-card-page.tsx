@@ -1,35 +1,31 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 import Logo from '../../components/logo/logo';
 import ListReviews from '../../components/list-reviews/list-reviews';
-import FormReview from '../../components/form-review/form-review';
 import Map from '../../components/map/map';
 import ListOffers from '../../components/list-offers/list-offers';
 
 import { PropertiesMap, StyleOfferCard } from '../../const';
-import { Offers, City, Offer } from '../../types/data';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchNearbyOffersAction, fetchReviewsAction, fetchSelectedOfferAction } from '../../store/api-actions';
 
+function OfferCardPage(): JSX.Element {
+  const offer = useAppSelector((state) => state.selectedOffer);
+  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
+  const reviews = useAppSelector((state) => state.reviews);
 
-type OfferCardPageProps = {
-  offers: Offers;
-  city: City;
-}
+  const dispatch = useAppDispatch();
 
-function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(undefined);
+  const {id} = useParams();
+  const offerId = Number(id);
 
-  const params = useParams();
-  const offer = offers.find((item) => String(item.id) === params.id);
-
-  const nearOffers = offers.slice(0, 3);
-
-  const onListOffersHover = (listOfferId: number | null) => {
-    const currentOffer = offers.find((item) => item.id === listOfferId);
-
-    setSelectedOffer(currentOffer);
-  };
+  useEffect(() => {
+    dispatch(fetchSelectedOfferAction(offerId));
+    dispatch(fetchNearbyOffersAction(offerId));
+    dispatch(fetchReviewsAction(offerId));
+  }, [dispatch, offerId]);
 
   return (
     <div className="page">
@@ -64,11 +60,11 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer?.photos.map((photo, id) => {
-                const keyValue = `${id}-${photo}`;
+              {offer?.images.map((image, index) => {
+                const keyValue = `${index}-${image}`;
                 return (
                   <div key={keyValue} className="property__image-wrapper">
-                    <img className="property__image" src={photo} alt="Photostudio" />
+                    <img className="property__image" src={image} alt="Photostudio" />
                   </div>
                 );
               })}
@@ -76,14 +72,14 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer?.premium ?
+              {offer?.isPremium ?
                 <div className="property__mark">
                   <span>Premium</span>
                 </div>
                 : ''}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  {offer?.header}
+                  {offer?.title}
                 </h1>
               </div>
               <div className="property__rating rating">
@@ -106,7 +102,7 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
                   {offer?.bedrooms} Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {offer?.adults} adults
+                  Max {offer?.maxAdults} adults
                 </li>
               </ul>
               <div className="property__price">
@@ -116,8 +112,8 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer?.householdItems.map((item, id) => {
-                    const keyValue = `${id}-${item}`;
+                  {offer?.goods.map((item, index) => {
+                    const keyValue = `${index}-${item}`;
                     return (
                       <li key={keyValue} className="property__inside-item">
                         {item}
@@ -129,14 +125,14 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper ${offer?.owner.statusPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={offer?.owner.avatar} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper ${offer?.host.isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
+                    <img className="property__avatar user__avatar" src={offer?.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {offer?.owner.name}
+                    {offer?.host.name}
                   </span>
                   <span className="property__user-status">
-                    {offer?.owner.statusPro ? 'Pro' : ''}
+                    {offer?.host.isPro ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
@@ -145,18 +141,12 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offer?.reviews.length}</span></h2>
-                <ListReviews offer={offer} />
-                <FormReview />
-              </section>
+              <ListReviews reviews={reviews} />
             </div>
           </div>
           <Map
-            offers={nearOffers}
-            city={city}
+            offers={nearbyOffers}
             propertiesMap={PropertiesMap.OfferCard}
-            selectedOffer={selectedOffer}
           />
         </section>
         <div className="container">
@@ -164,8 +154,7 @@ function OfferCardPage({offers, city}: OfferCardPageProps): JSX.Element {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <ListOffers
-                offers={nearOffers}
-                onListOffersHover={onListOffersHover}
+                offers={nearbyOffers}
                 styleOfferCard={StyleOfferCard.NearOffer}
               />
             </div>
