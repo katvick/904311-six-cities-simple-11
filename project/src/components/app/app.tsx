@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
@@ -9,6 +9,8 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
 
 import { useAppSelector } from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -22,7 +24,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -41,7 +43,7 @@ function App(): JSX.Element {
             element={<NotFoundPage />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
