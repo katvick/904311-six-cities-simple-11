@@ -1,8 +1,9 @@
 import { useAppDispatch } from '../../hooks';
 import { setActiveOffer } from '../../store/action';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { Offer } from '../../types/data';
 import { StyleOfferCard } from '../../types/common';
+import { AppRoute } from '../../const';
 
 type OfferCardProps = {
   offer: Offer;
@@ -22,7 +23,7 @@ function OfferCard({offer, styleOfferCard}: OfferCardProps): JSX.Element {
     type
   } = offer;
 
-  const linkOfferCard = `/offer/${id}`;
+  const linkOfferCard = generatePath(AppRoute.OfferCard, {id: id});
 
   return (
     <article className={`${styleOfferCard.classArticle} place-card`}
