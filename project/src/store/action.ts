@@ -18,6 +18,7 @@ export const loadReviews = createAction<Reviews>('data/loadReviews');
 export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+export const setUserEmail = createAction<string>('user/setUserEmail');
 
 export const setError = createAction<string | null>('setError');
 
