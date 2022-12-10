@@ -14,10 +14,11 @@ import {
   setActiveOffer,
   loadSelectedOffer,
   loadNearbyOffers,
+  setFormReviewData,
   getUserEmail, } from './action';
 import { sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
-import { Offer, Offers, Reviews } from '../types/data';
+import { Offer, Offers, Reviews, Review } from '../types/common';
 
 type InitialState = {
   city: string;
@@ -34,6 +35,7 @@ type InitialState = {
   isSelectedOfferLoading: boolean;
   isNearbyOffersLoading: boolean;
   isReviewsLoading: boolean;
+  formReviewData: Review | null;
   error: string | null;
 }
 
@@ -52,6 +54,7 @@ const initialState: InitialState = {
   isSelectedOfferLoading: false,
   isNearbyOffersLoading: false,
   isReviewsLoading: false,
+  formReviewData: null,
   error: null,
 };
 
@@ -95,6 +98,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setReviewsLoadinStatus, (state, action) => {
       state.isReviewsLoading = action.payload;
+    })
+    .addCase(setFormReviewData, (state, action) => {
+      state.formReviewData = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

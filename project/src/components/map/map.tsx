@@ -3,8 +3,8 @@ import { useAppSelector } from '../../hooks';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
-import { Offers, Location } from '../../types/data';
-import { PropertiesMap } from '../../types/common';
+import { Offers, Location } from '../../types/common';
+import { PropertiesMap } from '../../types/properties-style';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 
 type MapProps = {

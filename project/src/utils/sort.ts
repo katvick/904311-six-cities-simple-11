@@ -1,4 +1,4 @@
-import { Offer, Offers } from '../types/data';
+import { Offer, Offers } from '../types/common';
 import { SortType } from '../const';
 
 export const sortByType = (offers: Offers, sortedOffers: Offers, sortType: string) => {

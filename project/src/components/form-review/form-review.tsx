@@ -1,11 +1,26 @@
 import { useState, ChangeEvent } from 'react';
+// import { useAppDispatch, useAppSelector } from '../../hooks';
 
+enum ReviewTextLength {
+  Min = 50,
+  Max = 300,
+}
 
 function FormReview(): JSX.Element {
+  // const userData = useAppSelector((state) => state.userData);
+  // const formReviewData = useAppSelector((state) => state.formReviewData);
+
+  // const dispatch = useAppDispatch();
+
+
   const [formData, setFormData] = useState({
-    rating: '',
+    rating: null,
     review: ''
   });
+
+  const isFormInvalid = formData.rating === null
+    || formData.review.length < ReviewTextLength.Min
+    || formData.review.length > ReviewTextLength.Max;
 
   const ratingChangeHandle = ({target}: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = target;
@@ -61,7 +76,7 @@ function FormReview(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isFormInvalid}>Submit</button>
       </div>
     </form>
   );

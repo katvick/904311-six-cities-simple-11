@@ -1,9 +1,52 @@
-export type PropertiesMap = {
-  className: string;
-  height: string;
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
 }
 
-export type StyleOfferCard = {
-  classArticle: string;
-  classImageWrapper: string;
-};
+export type Host = {
+  avatarUrl: string;
+  id: number;
+  isPro: boolean;
+  name: string;
+}
+
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
+export type City = {
+  location: Location;
+  name: string;
+}
+
+export type Offer = {
+  bedrooms: number;
+  city: City;
+  description: string;
+  goods: string[];
+  host: Host;
+  id: number;
+  images: string[];
+  isPremium: boolean;
+  location: Location;
+  maxAdults: number;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  type: string;
+  };
+
+export type Offers = Offer[];
+export type Cities = City[];
+export type Reviews = Review[];
