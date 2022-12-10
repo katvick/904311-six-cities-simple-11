@@ -8,10 +8,10 @@ import {
   loadReviews,
   setDataLoadingStatus,
   requireAuthorization,
-  setError,
   setActiveOffer,
   loadSelectedOffer,
-  loadNearbyOffers, } from './action';
+  loadNearbyOffers,
+  setUserEmail, } from './action';
 import { sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
 import { Offer, Offers, Reviews } from '../types/data';
@@ -26,6 +26,7 @@ type InitialState = {
   reviews: Reviews;
   sort: string;
   authorizationStatus: string;
+  userEmail: string | null;
   isDataLoading: boolean;
   error: string | null;
 }
@@ -40,6 +41,7 @@ const initialState: InitialState = {
   reviews: [],
   sort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
+  userEmail: null,
   isDataLoading: false,
   error: null,
 };
@@ -79,8 +81,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
+    .addCase(setUserEmail, (state, action) => {
+      state.userEmail = action.payload;
     });
 });
 

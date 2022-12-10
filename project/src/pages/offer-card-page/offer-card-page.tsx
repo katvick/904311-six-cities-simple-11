@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
-import Logo from '../../components/logo/logo';
 import ListReviews from '../../components/list-reviews/list-reviews';
 import Map from '../../components/map/map';
 import ListOffers from '../../components/list-offers/list-offers';
@@ -10,6 +9,7 @@ import ListOffers from '../../components/list-offers/list-offers';
 import { PropertiesMap, StyleOfferCard } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNearbyOffersAction, fetchReviewsAction, fetchSelectedOfferAction } from '../../store/api-actions';
+import Header from '../../components/header/header';
 
 function OfferCardPage(): JSX.Element {
   const offer = useAppSelector((state) => state.selectedOffer);
@@ -33,28 +33,7 @@ function OfferCardPage(): JSX.Element {
         <title>6 Cities. Offer card</title>
       </Helmet>
 
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </div>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="/">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
