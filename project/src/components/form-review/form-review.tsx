@@ -1,5 +1,6 @@
-import { useState, ChangeEvent } from 'react';
-// import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sendReviewAction } from '../../store/api-actions';
 
 enum ReviewTextLength {
   Min = 50,
@@ -7,11 +8,9 @@ enum ReviewTextLength {
 }
 
 function FormReview(): JSX.Element {
-  // const userData = useAppSelector((state) => state.userData);
-  // const formReviewData = useAppSelector((state) => state.formReviewData);
+  const offerId = useAppSelector((state) => state.selectedOffer?.id);
 
-  // const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
     rating: null,
@@ -32,8 +31,20 @@ function FormReview(): JSX.Element {
     setFormData({...formData, [name]: value});
   };
 
+  const formSubmitHandle = (evt: FormEvent) => {
+    evt.preventDefault();
+
+    if (formData.review !== '' && formData.rating !== null && offerId !== undefined) {
+      dispatch(sendReviewAction({
+        id: offerId,
+        comment: formData.review,
+        rating: formData.rating,
+      }));
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="/" method="post">
+    <form className="reviews__form form" action="/" method="post" onSubmit={formSubmitHandle}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" onChange={ratingChangeHandle} name="rating" value="5" id="5-stars" type="radio" />

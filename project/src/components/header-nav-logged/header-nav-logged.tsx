@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 
 function HeaderNavLogged(): JSX.Element {
-  const email = useAppSelector((state) => state.userEmail);
+  const email = useAppSelector((state) => state.userInfo?.email);
 
   const dispatch = useAppDispatch();
 
