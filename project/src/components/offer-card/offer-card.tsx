@@ -23,7 +23,7 @@ function OfferCard({offer, styleOfferCard}: OfferCardProps): JSX.Element {
     type
   } = offer;
 
-  const linkOfferCard = generatePath(AppRoute.OfferCard, {id: id});
+  const linkOfferCard = generatePath(AppRoute.OfferCard, {id: String(id)});
 
   return (
     <article className={`${styleOfferCard.classArticle} place-card`}

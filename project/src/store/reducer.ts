@@ -8,7 +8,6 @@ import {
   loadReviews,
   setDataLoadingStatus,
   requireAuthorization,
-  setError,
   setActiveOffer,
   loadSelectedOffer,
   loadNearbyOffers,
@@ -84,9 +83,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUserEmail, (state, action) => {
       state.userEmail = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 

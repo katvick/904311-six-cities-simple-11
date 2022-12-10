@@ -20,6 +20,4 @@ export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingSt
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const setUserEmail = createAction<string>('user/setUserEmail');
 
-export const setError = createAction<string | null>('setError');
-
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
