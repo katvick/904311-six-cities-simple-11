@@ -10,11 +10,16 @@ import { PropertiesMap, StyleOfferCard } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNearbyOffersAction, fetchReviewsAction, fetchSelectedOfferAction } from '../../store/api-actions';
 import Header from '../../components/header/header';
+import LoadingPage from '../loading-page/loading-page';
 
 function OfferCardPage(): JSX.Element {
   const offer = useAppSelector((state) => state.selectedOffer);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
   const reviews = useAppSelector((state) => state.reviews);
+
+  const checkOfferLoading = useAppSelector((state) => state.isSelectedOfferLoading);
+  const checkNearbyOffersLoading = useAppSelector((state) => state.isNearbyOffersLoading);
+  const checkReviewsLoading = useAppSelector((state) => state.isReviewsLoading);
 
   const dispatch = useAppDispatch();
 
@@ -26,6 +31,12 @@ function OfferCardPage(): JSX.Element {
     dispatch(fetchNearbyOffersAction(offerId));
     dispatch(fetchReviewsAction(offerId));
   }, [dispatch, offerId]);
+
+  if (checkOfferLoading || checkNearbyOffersLoading || checkReviewsLoading || offer === null) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   return (
     <div className="page">
