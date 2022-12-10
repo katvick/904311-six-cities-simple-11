@@ -76,7 +76,7 @@ function OfferCardPage(): JSX.Element {
                 <div className="property__stars rating__stars">
                   <span
                     style={{
-                      width: `${offer ? offer.rating / 5 * 100 : ''}%`
+                      width: `${offer ? Math.round(offer.rating) / 5 * 100 : ''}%`
                     }}
                   >
                   </span>

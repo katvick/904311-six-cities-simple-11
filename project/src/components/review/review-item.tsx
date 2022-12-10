@@ -28,7 +28,7 @@ function ReviewItem({review}: ReviewItemProps): JSX.Element {
           <div className="reviews__stars rating__stars">
             <span
               style={{
-                width: `${rating / 5 * 100}%`
+                width: `${Math.round(rating) / 5 * 100}%`
               }}
             >
             </span>
