@@ -14,7 +14,8 @@ import {
   setActiveOffer,
   loadSelectedOffer,
   loadNearbyOffers,
-  getUserInfo, } from './action';
+  getUserInfo,
+  getUserInfoLoadinStatus, } from './action';
 import { sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
 import { Offer, Offers, Reviews } from '../types/common';
@@ -31,6 +32,7 @@ type InitialState = {
   sort: string;
   authorizationStatus: string;
   userInfo: AuthInfo | null;
+  isUserInfoLoading: boolean;
   isOffersLoading: boolean;
   isSelectedOfferLoading: boolean;
   isNearbyOffersLoading: boolean;
@@ -49,6 +51,7 @@ const initialState: InitialState = {
   sort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
   userInfo: null,
+  isUserInfoLoading: false,
   isOffersLoading: false,
   isSelectedOfferLoading: false,
   isNearbyOffersLoading: false,
@@ -102,6 +105,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getUserInfo, (state, action) => {
       state.userInfo = action.payload;
+    })
+    .addCase(getUserInfoLoadinStatus, (state, action) => {
+      state.isUserInfoLoading = action.payload;
     });
 });
 

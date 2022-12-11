@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
+import { fetchInfoAuthAction, logoutAction } from '../../store/api-actions';
 
 function HeaderNavLogged(): JSX.Element {
   const email = useAppSelector((state) => state.userInfo?.email);
@@ -20,6 +20,7 @@ function HeaderNavLogged(): JSX.Element {
           onClick={(evt) => {
             evt.preventDefault();
             dispatch(logoutAction());
+            dispatch(fetchInfoAuthAction());
           }}
           className="header__nav-link"
           to="/"

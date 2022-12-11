@@ -8,19 +8,12 @@ import SortOptions from '../../components/sort/sort';
 
 import { PropertiesMap, StyleOfferCard } from '../../const';
 import Header from '../../components/header/header';
-// import { fetchOffersAction } from '../../store/api-actions';
-// import { useEffect } from 'react';
+
 
 function MainPage(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
   const offers = useAppSelector((state) => state.sortedOffers);
   const activeSort = useAppSelector((state) => state.sort);
-
-  // const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchOffersAction());
-  // }, [dispatch]);
 
   return (
     <div className="page page--gray page--main">

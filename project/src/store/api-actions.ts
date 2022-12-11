@@ -14,7 +14,8 @@ import {
   loadNearbyOffers,
   fillListOffer,
   redirectToRoute,
-  getUserInfo} from './action';
+  getUserInfo,
+  getUserInfoLoadinStatus} from './action';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -108,6 +109,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
+    dispatch(fetchInfoAuthAction());
   },
 );
 
@@ -118,8 +120,14 @@ export const fetchInfoAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/fetchInfoAuth',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<AuthInfo>(APIRoute.Login);
-    dispatch(getUserInfo(data));
+    dispatch(getUserInfoLoadinStatus(true));
+    try {
+      const {data} = await api.get<AuthInfo>(APIRoute.Login);
+      dispatch(getUserInfo(data));
+    } catch {
+      dispatch(getUserInfo(null));
+    }
+    dispatch(getUserInfoLoadinStatus(false));
   },
 );
 
@@ -133,6 +141,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(fetchInfoAuthAction());
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -147,5 +156,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(fetchInfoAuthAction());
   },
 );
