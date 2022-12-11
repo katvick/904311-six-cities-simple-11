@@ -6,15 +6,19 @@ import {
   sortOffers,
   loadOffers,
   loadReviews,
-  setDataLoadingStatus,
+  setOffersLoadingStatus,
+  setSelectedOfferLoadingStatus,
+  setNearbyOffersLoadingStatus,
+  setReviewsLoadinStatus,
   requireAuthorization,
   setActiveOffer,
   loadSelectedOffer,
   loadNearbyOffers,
-  setUserEmail, } from './action';
+  getUserInfo, } from './action';
 import { sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
-import { Offer, Offers, Reviews } from '../types/data';
+import { Offer, Offers, Reviews } from '../types/common';
+import { AuthInfo } from '../types/user-data';
 
 type InitialState = {
   city: string;
@@ -26,8 +30,11 @@ type InitialState = {
   reviews: Reviews;
   sort: string;
   authorizationStatus: string;
-  userEmail: string | null;
-  isDataLoading: boolean;
+  userInfo: AuthInfo | null;
+  isOffersLoading: boolean;
+  isSelectedOfferLoading: boolean;
+  isNearbyOffersLoading: boolean;
+  isReviewsLoading: boolean;
   error: string | null;
 }
 
@@ -41,8 +48,11 @@ const initialState: InitialState = {
   reviews: [],
   sort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
-  userEmail: null,
-  isDataLoading: false,
+  userInfo: null,
+  isOffersLoading: false,
+  isSelectedOfferLoading: false,
+  isNearbyOffersLoading: false,
+  isReviewsLoading: false,
   error: null,
 };
 
@@ -75,14 +85,23 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
     })
-    .addCase(setDataLoadingStatus, (state, action) => {
-      state.isDataLoading = action.payload;
+    .addCase(setOffersLoadingStatus, (state, action) => {
+      state.isOffersLoading = action.payload;
+    })
+    .addCase(setSelectedOfferLoadingStatus, (state, action) => {
+      state.isSelectedOfferLoading = action.payload;
+    })
+    .addCase(setNearbyOffersLoadingStatus, (state, action) => {
+      state.isNearbyOffersLoading = action.payload;
+    })
+    .addCase(setReviewsLoadinStatus, (state, action) => {
+      state.isReviewsLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setUserEmail, (state, action) => {
-      state.userEmail = action.payload;
+    .addCase(getUserInfo, (state, action) => {
+      state.userInfo = action.payload;
     });
 });
 

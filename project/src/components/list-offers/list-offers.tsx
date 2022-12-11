@@ -1,6 +1,6 @@
 import OfferCard from '../offer-card/offer-card';
-import { Offers } from '../../types/data';
-import { StyleOfferCard } from '../../types/common';
+import { Offers } from '../../types/common';
+import { StyleOfferCard } from '../../types/properties-style';
 
 type ListOffersProps = {
   offers: Offers;

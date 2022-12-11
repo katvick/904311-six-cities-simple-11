@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../hooks';
 import { setActiveOffer } from '../../store/action';
 import { generatePath, Link } from 'react-router-dom';
-import { Offer } from '../../types/data';
-import { StyleOfferCard } from '../../types/common';
+import { Offer } from '../../types/common';
+import { StyleOfferCard } from '../../types/properties-style';
 import { AppRoute } from '../../const';
 
 type OfferCardProps = {
@@ -53,7 +53,7 @@ function OfferCard({offer, styleOfferCard}: OfferCardProps): JSX.Element {
           <div className="place-card__stars rating__stars">
             <span
               style={{
-                width: `${rating / 5 * 100}%`
+                width: `${Math.round(rating) / 5 * 100}%`
               }}
             >
             </span>
