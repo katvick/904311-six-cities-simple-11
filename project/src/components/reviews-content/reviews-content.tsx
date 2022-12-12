@@ -1,14 +1,10 @@
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { Reviews } from '../../types/common';
-import FormReview from '../form-review/form-review';
-import ReviewItem from '../review/review-item';
+import ReviewForm from '../review-form/review-form';
+import ReviewItem from '../review-item/review-item';
 
-type ListReviewsProps = {
-  reviews: Reviews;
-}
-
-function ListReviews({reviews}: ListReviewsProps): JSX.Element {
+function ReviewsContent(): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
@@ -19,9 +15,9 @@ function ListReviews({reviews}: ListReviewsProps): JSX.Element {
           <ReviewItem key={review.id} review={review}/>
         ))}
       </ul>
-      {authorizationStatus === AuthorizationStatus.Auth ? <FormReview /> : ''}
+      {authorizationStatus === AuthorizationStatus.Auth ? <ReviewForm /> : ''}
     </section>
   );
 }
 
-export default ListReviews;
+export default ReviewsContent;

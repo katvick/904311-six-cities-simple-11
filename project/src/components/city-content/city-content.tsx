@@ -1,8 +1,8 @@
 import { PropertiesMap, StyleOfferCard } from '../../const';
 import { useAppSelector } from '../../hooks';
-import ListOffers from '../list-offers/list-offers';
+import ListOffers from '../offers-list/offers-list';
 import Map from '../map/map';
-import SortOptions from '../sort/sort';
+import Sorting from '../sorting/sorting';
 
 function CityContent(): JSX.Element {
   const activeCity = useAppSelector((state) => state.city);
@@ -16,7 +16,7 @@ function CityContent(): JSX.Element {
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in {activeCity}</b>
 
-          <SortOptions sortType={activeSort} />
+          <Sorting sortType={activeSort} />
 
           <ListOffers offers={offers} styleOfferCard={StyleOfferCard.CityOffer} />
 

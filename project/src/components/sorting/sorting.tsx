@@ -2,11 +2,11 @@ import { useAppDispatch } from '../../hooks';
 import { changeSort, sortOffers } from '../../store/action';
 import { SortType } from '../../const';
 
-type SortOptionsProps = {
+type SortingProps = {
   sortType: string;
 }
 
-function SortOptions({sortType}: SortOptionsProps): JSX.Element {
+function Sorting({sortType}: SortingProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const changeSortHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
@@ -33,4 +33,4 @@ function SortOptions({sortType}: SortOptionsProps): JSX.Element {
   );
 }
 
-export default SortOptions;
+export default Sorting;
