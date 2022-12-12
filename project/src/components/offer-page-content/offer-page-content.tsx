@@ -6,7 +6,6 @@ function OfferPageContent(): JSX.Element {
   const offer = useAppSelector((state) => state.selectedOffer);
   const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
 
-
   return (
     <main className="page__main page__main--property">
       <OfferFeatures offer={offer} nearbyOffers={nearbyOffers}/>

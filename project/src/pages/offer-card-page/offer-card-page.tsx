@@ -9,9 +9,13 @@ import LoadingPage from '../loading-page/loading-page';
 import OfferPageContent from '../../components/offer-page-content/offer-page-content';
 
 function OfferCardPage(): JSX.Element {
+  const offer = useAppSelector((state) => state.selectedOffer);
+
   const checkOfferLoading = useAppSelector((state) => state.isSelectedOfferLoading);
   const checkNearbyOffersLoading = useAppSelector((state) => state.isNearbyOffersLoading);
   const checkReviewsLoading = useAppSelector((state) => state.isReviewsLoading);
+
+  const isDataLoading = offer === null || checkOfferLoading || checkNearbyOffersLoading || checkReviewsLoading;
 
   const dispatch = useAppDispatch();
 
@@ -24,12 +28,6 @@ function OfferCardPage(): JSX.Element {
     dispatch(fetchReviewsAction(offerId));
   }, [dispatch, offerId]);
 
-  if (checkOfferLoading || checkNearbyOffersLoading || checkReviewsLoading) {
-    return (
-      <LoadingPage />
-    );
-  }
-
   return (
     <div className="page">
       <Helmet>
@@ -37,7 +35,12 @@ function OfferCardPage(): JSX.Element {
       </Helmet>
 
       <Header />
-      <OfferPageContent />
+
+      {
+        isDataLoading
+          ? <LoadingPage />
+          : <OfferPageContent />
+      }
     </div>
   );
 }
