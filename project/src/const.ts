@@ -16,7 +16,7 @@ export const PropertiesMap = {
     className: 'cities__map',
     height: '980px'
   },
-  OfferCard: {
+  NearOffer: {
     className: 'property__map',
     height: '579px'
   }

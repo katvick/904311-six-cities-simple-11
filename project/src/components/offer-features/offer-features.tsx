@@ -1,14 +1,22 @@
 import { PropertiesMap } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { setActiveOffer } from '../../store/action';
 import { Offer, Offers } from '../../types/common';
 import Map from '../map/map';
 import ReviewsContent from '../reviews-content/reviews-content';
 
 type OfferFeaturesProps = {
-  offer: Offer | null;
+  offer: Offer;
   nearbyOffers: Offers;
 }
 
 function OfferFeatures({offer, nearbyOffers}: OfferFeaturesProps): JSX.Element {
+  const allOffers = nearbyOffers.concat(offer);
+
+  const dispatch = useAppDispatch();
+
+  dispatch(setActiveOffer(offer));
+
   return (
     <section className="property">
       <div className="property__gallery-container container">
@@ -98,8 +106,8 @@ function OfferFeatures({offer, nearbyOffers}: OfferFeaturesProps): JSX.Element {
         </div>
       </div>
       <Map
-        offers={nearbyOffers}
-        propertiesMap={PropertiesMap.OfferCard}
+        offers={allOffers}
+        propertiesMap={PropertiesMap.NearOffer}
       />
     </section>
   );
