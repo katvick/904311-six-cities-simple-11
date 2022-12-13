@@ -16,7 +16,7 @@ import {
   loadNearbyOffers,
   getUserInfo,
   getUserInfoLoadinStatus, } from './action';
-import { sortByType } from '../utils/sort';
+import { sortByDate, sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
 import { Offer, Offers, Reviews } from '../types/common';
 import { AuthInfo } from '../types/user-data';
@@ -86,7 +86,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.selectedOffer = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
-      state.reviews = action.payload;
+      const reviews = action.payload;
+      state.reviews = reviews.sort(sortByDate);
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
