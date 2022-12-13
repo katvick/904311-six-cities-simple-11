@@ -92,7 +92,7 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
   'offer/sendReview',
   async ({id, comment, rating}, {dispatch, extra: api}) => {
     await api.post<NewReviewData>(`${APIRoute.Reviews}/${id}`, {comment, rating});
-    // dispatch(fetchReviewsAction(id));
+    dispatch(fetchReviewsAction(id));
   }
 );
 
