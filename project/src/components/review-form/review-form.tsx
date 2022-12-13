@@ -7,7 +7,7 @@ enum ReviewTextLength {
   Max = 300,
 }
 
-function FormReview(): JSX.Element {
+function ReviewForm(): JSX.Element {
   const offerId = useAppSelector((state) => state.selectedOffer?.id);
 
   const dispatch = useAppDispatch();
@@ -93,4 +93,4 @@ function FormReview(): JSX.Element {
   );
 }
 
-export default FormReview;
+export default ReviewForm;

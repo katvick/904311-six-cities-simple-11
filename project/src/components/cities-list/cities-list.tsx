@@ -1,14 +1,12 @@
 import React from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity, fillListOffer } from '../../store/action';
 import CityItem from '../city-item/city-item';
 import { CITIES } from '../../const';
 
-type ListCitiesProps = {
-  activeCity: string;
-}
+function CitiesList(): JSX.Element {
+  const activeCity = useAppSelector((state) => state.city);
 
-function ListCities({activeCity}: ListCitiesProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const changeCityHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
@@ -37,4 +35,4 @@ function ListCities({activeCity}: ListCitiesProps): JSX.Element {
   );
 }
 
-export default ListCities;
+export default CitiesList;

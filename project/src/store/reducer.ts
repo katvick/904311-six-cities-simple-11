@@ -14,8 +14,9 @@ import {
   setActiveOffer,
   loadSelectedOffer,
   loadNearbyOffers,
-  getUserInfo, } from './action';
-import { sortByType } from '../utils/sort';
+  getUserInfo,
+  getUserInfoLoadinStatus, } from './action';
+import { sortByDate, sortByType } from '../utils/sort';
 import { AuthorizationStatus, SortType } from '../const';
 import { Offer, Offers, Reviews } from '../types/common';
 import { AuthInfo } from '../types/user-data';
@@ -31,6 +32,7 @@ type InitialState = {
   sort: string;
   authorizationStatus: string;
   userInfo: AuthInfo | null;
+  isUserInfoLoading: boolean;
   isOffersLoading: boolean;
   isSelectedOfferLoading: boolean;
   isNearbyOffersLoading: boolean;
@@ -49,6 +51,7 @@ const initialState: InitialState = {
   sort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.Unknown,
   userInfo: null,
+  isUserInfoLoading: false,
   isOffersLoading: false,
   isSelectedOfferLoading: false,
   isNearbyOffersLoading: false,
@@ -83,7 +86,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.selectedOffer = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
-      state.reviews = action.payload;
+      const reviews = action.payload;
+      state.reviews = reviews.sort(sortByDate);
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;
@@ -102,6 +106,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getUserInfo, (state, action) => {
       state.userInfo = action.payload;
+    })
+    .addCase(getUserInfoLoadinStatus, (state, action) => {
+      state.isUserInfoLoading = action.payload;
     });
 });
 

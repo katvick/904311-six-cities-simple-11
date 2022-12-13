@@ -1,5 +1,6 @@
-import { Offer, Offers } from '../types/common';
+import { Offer, Offers, Review } from '../types/common';
 import { SortType } from '../const';
+import dayjs from 'dayjs';
 
 export const sortByType = (offers: Offers, sortedOffers: Offers, sortType: string) => {
   switch (sortType) {
@@ -13,3 +14,5 @@ export const sortByType = (offers: Offers, sortedOffers: Offers, sortType: strin
       return offers;
   }
 };
+
+export const sortByDate = (reviewA: Review, reviewB: Review) => dayjs(reviewB.date).diff(dayjs(reviewA.date));

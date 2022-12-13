@@ -22,6 +22,7 @@ export const setNearbyOffersLoadingStatus = createAction<boolean>('offer/setNear
 export const setReviewsLoadinStatus = createAction<boolean>('offer/setReviewsLoadinStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const getUserInfo = createAction<AuthInfo>('user/getUserInfo');
+export const getUserInfo = createAction<AuthInfo | null>('user/getUserInfo');
+export const getUserInfoLoadinStatus = createAction<boolean>('user/getUserInfoLoadinStatus');
 
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');

@@ -3,7 +3,7 @@ import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import { AuthData } from '../../types/auth-data';
-import { loginAction } from '../../store/api-actions';
+import { fetchInfoAuthAction, loginAction } from '../../store/api-actions';
 
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -13,6 +13,7 @@ function LoginPage(): JSX.Element {
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
+    dispatch(fetchInfoAuthAction());
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
