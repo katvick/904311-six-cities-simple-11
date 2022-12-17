@@ -63,7 +63,6 @@ export const CITIES = [
 ];
 
 export enum NameSpace {
-  Data = 'DATA',
   User = 'USER',
   Offers = 'OFFERS',
   Offer = 'OFFER',

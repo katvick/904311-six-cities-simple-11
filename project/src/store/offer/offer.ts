@@ -12,7 +12,7 @@ const initialState: OfferState = {
   isReviewsLoading: false,
 };
 
-export const OffersReducer = createSlice({
+export const offerReducer = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {},
