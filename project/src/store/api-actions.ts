@@ -29,8 +29,13 @@ export const fetchSelectedOfferAction = createAsyncThunk<Offer, number, {
   'offer/fetchSelectedOffer',
   async (offerId, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
+    if (data) {
+      return data;
+    } else {
+      dispatch(redirectToRoute(AppRoute.NotFound));
+    }
+
     return data;
-    // dispatch(redirectToRoute(AppRoute.NotFound));
   }
 );
 

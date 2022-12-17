@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../hooks';
 import Logo from '../../components/logo/logo';
 import { AuthData } from '../../types/auth-data';
 import { fetchUserInfoAction, loginAction } from '../../store/api-actions';
+import { toast } from 'react-toastify';
 
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -20,6 +21,16 @@ function LoginPage(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
+      if (!/[0-9]/.test(passwordRef.current.value)) {
+        toast.error('Password must contain at least one number');
+        return;
+      }
+
+      if (!/[A-Za-z]/.test(passwordRef.current.value)) {
+        toast.error('Password must contain at least and one letter');
+        return;
+      }
+
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
