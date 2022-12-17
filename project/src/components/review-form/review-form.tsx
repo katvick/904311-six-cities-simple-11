@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
+import { getSelectedOffer } from '../../store/offer/selectors';
 
 enum ReviewTextLength {
   Min = 50,
@@ -8,7 +9,7 @@ enum ReviewTextLength {
 }
 
 function ReviewForm(): JSX.Element {
-  const offerId = useAppSelector((state) => state.selectedOffer?.id);
+  const offerId = useAppSelector(getSelectedOffer)?.id;
 
   const dispatch = useAppDispatch();
 

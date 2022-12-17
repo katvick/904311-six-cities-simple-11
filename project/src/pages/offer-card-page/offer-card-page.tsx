@@ -7,13 +7,14 @@ import { fetchNearbyOffersAction, fetchReviewsAction, fetchSelectedOfferAction }
 import Header from '../../components/header/header';
 import LoadingPage from '../loading-page/loading-page';
 import OfferPageContent from '../../components/offer-page-content/offer-page-content';
+import { getNearbyOffersLoadingStatus, getReviewsLoadingStatus, getSelectedOffer, getSelectedOfferLoadingStatus } from '../../store/offer/selectors';
 
 function OfferCardPage(): JSX.Element {
-  const offer = useAppSelector((state) => state.selectedOffer);
+  const offer = useAppSelector(getSelectedOffer);
 
-  const checkOfferLoading = useAppSelector((state) => state.isSelectedOfferLoading);
-  const checkNearbyOffersLoading = useAppSelector((state) => state.isNearbyOffersLoading);
-  const checkReviewsLoading = useAppSelector((state) => state.isReviewsLoading);
+  const checkOfferLoading = useAppSelector(getSelectedOfferLoadingStatus);
+  const checkNearbyOffersLoading = useAppSelector(getNearbyOffersLoadingStatus);
+  const checkReviewsLoading = useAppSelector(getReviewsLoadingStatus);
 
   const isDataLoading = offer === null || checkOfferLoading || checkNearbyOffersLoading || checkReviewsLoading;
 

@@ -42,6 +42,8 @@ export const offersReducer = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersLoading = false;
+        state.sortedOffers = state.offers.filter(({city}) => city.name === state.city);
+        state.sort = SortType.POPULAR;
       });
   }
 });

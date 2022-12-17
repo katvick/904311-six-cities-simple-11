@@ -3,11 +3,14 @@ import { useAppSelector } from '../../hooks';
 import ListOffers from '../offers-list/offers-list';
 import Map from '../map/map';
 import Sorting from '../sorting/sorting';
+import { getCity, getSort, getSortedOffers } from '../../store/offers/selectors';
 
 function CityContent(): JSX.Element {
-  const activeCity = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.sortedOffers);
-  const activeSort = useAppSelector((state) => state.sort);
+  const activeCity = useAppSelector(getCity);
+  const offers = useAppSelector(getSortedOffers);
+  const activeSort = useAppSelector(getSort);
+
+  // const filteredOffers = offers.filter(({city}) => city.name === activeCity);
 
   return (
     <div className="cities">

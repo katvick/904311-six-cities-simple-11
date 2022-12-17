@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../hooks';
-import { changeSort, sortOffers } from '../../store/action';
 import { SortType } from '../../const';
+import { changeSort, sortOffers } from '../../store/offers/offers';
 
 type SortingProps = {
   sortType: string;

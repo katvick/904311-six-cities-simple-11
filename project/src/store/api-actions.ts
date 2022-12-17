@@ -18,7 +18,6 @@ export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offers>(APIRoute.Offers);
     return data;
-    // dispatch(fillListOffer());
   }
 );
 
