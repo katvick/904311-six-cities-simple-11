@@ -7,9 +7,9 @@ import { fetchOffersAction } from '../api-actions';
 
 const initialState: OffersState = {
   city: 'Paris',
-  offers: [],
+  offersDefault: [],
   sort: SortType.POPULAR,
-  sortedOffers: [],
+  offersSorted: [],
   activeOffer: null,
   isOffersLoading: false,
 };
@@ -21,9 +21,6 @@ export const offersReducer = createSlice({
     changeCity: (state, action: PayloadAction<{city: string}>) => {
       state.city = action.payload.city;
     },
-    fillListOffer: (state) => {
-      state.sortedOffers = state.offers.filter(({city}) => city.name === state.city);
-    },
     setActiveOffer: (state, action: PayloadAction<Offer | null>) => {
       state.activeOffer = action.payload;
     },
@@ -31,7 +28,7 @@ export const offersReducer = createSlice({
       state.sort = action.payload.sort;
     },
     sortOffers: (state) => {
-      state.sortedOffers = sortByType(state.offers, state.sortedOffers, state.sort);
+      state.offersSorted = sortByType(state.offersDefault, state.offersSorted, state.sort);
     }
   },
   extraReducers(builder) {
@@ -40,12 +37,12 @@ export const offersReducer = createSlice({
         state.isOffersLoading = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+        state.offersDefault = action.payload;
+        state.offersSorted = action.payload;
         state.isOffersLoading = false;
-        state.sortedOffers = state.offers.filter(({city}) => city.name === state.city);
         state.sort = SortType.POPULAR;
       });
   }
 });
 
-export const {changeCity, fillListOffer, setActiveOffer, changeSort, sortOffers} = offersReducer.actions;
+export const {changeCity, setActiveOffer, changeSort, sortOffers} = offersReducer.actions;

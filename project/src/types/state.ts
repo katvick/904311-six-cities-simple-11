@@ -11,9 +11,9 @@ export type UserState = {
 
 export type OffersState = {
   city: string;
-  offers: Offers;
+  offersDefault: Offers;
   sort: string;
-  sortedOffers: Offers;
+  offersSorted: Offers;
   activeOffer: Offer | null;
   isOffersLoading: boolean;
 }

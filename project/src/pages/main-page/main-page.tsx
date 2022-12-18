@@ -4,12 +4,12 @@ import Header from '../../components/header/header';
 import MainContent from '../../components/main-content/main-content';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchOffersAction } from '../../store/api-actions';
-import { getOffers, getOffersLoadingStatus } from '../../store/offers/selectors';
+import { getOffersDefault, getOffersLoadingStatus } from '../../store/offers/selectors';
 import LoadingPage from '../loading-page/loading-page';
 
 
 function MainPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
+  const offers = useAppSelector(getOffersDefault);
   const isOffersLoading = useAppSelector(getOffersLoadingStatus);
 
   const dispatch = useAppDispatch();

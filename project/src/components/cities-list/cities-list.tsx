@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import CityItem from '../city-item/city-item';
 import { CITIES } from '../../const';
 import { getCity } from '../../store/offers/selectors';
-import { changeCity, fillListOffer } from '../../store/offers/offers';
+import { changeCity } from '../../store/offers/offers';
 
 function CitiesList(): JSX.Element {
   const activeCity = useAppSelector(getCity);
@@ -13,7 +13,6 @@ function CitiesList(): JSX.Element {
   const changeCityHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
     const target = evt.target as HTMLLIElement;
     dispatch(changeCity({city: target.innerText}));
-    dispatch(fillListOffer());
   };
 
   return (
