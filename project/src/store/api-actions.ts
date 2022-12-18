@@ -7,7 +7,8 @@ import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserInfo, UserData } from '../types/user-data';
-import { NewReviewData, ReviewRequestData } from '../types/review';
+import { ReviewRequestData } from '../types/review';
+import { addReview } from './offer/offer';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
@@ -70,7 +71,10 @@ export const sendReviewAction = createAsyncThunk<void, ReviewRequestData, {
 }>(
   'offer/sendReview',
   async ({id, comment, rating}, {dispatch, extra: api}) => {
-    await api.post<NewReviewData>(`${APIRoute.Reviews}/${id}`, {comment, rating});
+    const {data} = await api.post<Reviews>(`${APIRoute.Reviews}/${id}`, {comment, rating});
+    const newReview = data[data.length - 1];
+
+    dispatch(addReview(newReview));
   }
 );
 

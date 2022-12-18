@@ -8,4 +8,6 @@ export const getReviews = (state: State): Reviews => state[NameSpace.Offer].revi
 export const getSelectedOfferLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isSelectedOfferLoading;
 export const getNearbyOffersLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isNearbyOffersLoading;
 export const getReviewsLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isReviewsLoading;
+export const getReviewSendingStatus = (state: State): boolean => state[NameSpace.Offer].isReviewSending;
+export const getReviewSentSuccessfully = (state: State): boolean => state[NameSpace.Offer].isReviewSentSuccessfully;
 

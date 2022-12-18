@@ -25,6 +25,8 @@ export type OfferState = {
   isSelectedOfferLoading: boolean;
   isNearbyOffersLoading: boolean;
   isReviewsLoading: boolean;
+  isReviewSending: boolean;
+  isReviewSentSuccessfully: boolean;
 }
 
 export type State = ReturnType<typeof store.getState>;

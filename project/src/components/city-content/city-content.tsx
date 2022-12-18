@@ -10,8 +10,6 @@ function CityContent(): JSX.Element {
   const offers = useAppSelector(getSortedOffers);
   const activeSort = useAppSelector(getSort);
 
-  // const filteredOffers = offers.filter(({city}) => city.name === activeCity);
-
   return (
     <div className="cities">
       <div className="cities__places-container container">
