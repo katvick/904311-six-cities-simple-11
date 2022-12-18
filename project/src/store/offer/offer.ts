@@ -10,6 +10,7 @@ const initialState: OfferState = {
   nearbyOffers: [],
   reviews: [],
   isSelectedOfferLoading: false,
+  errorSelectedOfferLoading: false,
   isNearbyOffersLoading: false,
   isReviewsLoading: false,
   isReviewSending: false,
@@ -29,10 +30,15 @@ export const offerReducer = createSlice({
     builder
       .addCase(fetchSelectedOfferAction.pending, (state) => {
         state.isSelectedOfferLoading = true;
+        state.errorSelectedOfferLoading = false;
       })
       .addCase(fetchSelectedOfferAction.fulfilled, (state, action) => {
         state.selectedOffer = action.payload;
         state.isSelectedOfferLoading = false;
+      })
+      .addCase(fetchSelectedOfferAction.rejected, (state) => {
+        state.isSelectedOfferLoading = false;
+        state.errorSelectedOfferLoading = true;
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
         state.isNearbyOffersLoading = true;
@@ -41,12 +47,18 @@ export const offerReducer = createSlice({
         state.nearbyOffers = action.payload;
         state.isNearbyOffersLoading = false;
       })
+      .addCase(fetchNearbyOffersAction.rejected, (state) => {
+        state.isNearbyOffersLoading = false;
+      })
       .addCase(fetchReviewsAction.pending, (state) => {
         state.isReviewsLoading = true;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.reviews.sort(sortByDate);
+        state.isReviewsLoading = false;
+      })
+      .addCase(fetchReviewsAction.rejected, (state) => {
         state.isReviewsLoading = false;
       })
       .addCase(sendReviewAction.pending, (state) => {

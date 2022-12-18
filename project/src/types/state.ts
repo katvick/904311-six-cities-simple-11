@@ -23,6 +23,7 @@ export type OfferState = {
   nearbyOffers: Offers;
   reviews: Reviews;
   isSelectedOfferLoading: boolean;
+  errorSelectedOfferLoading: boolean;
   isNearbyOffersLoading: boolean;
   isReviewsLoading: boolean;
   isReviewSending: boolean;

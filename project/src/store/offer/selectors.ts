@@ -6,6 +6,7 @@ export const getSelectedOffer = (state: State): Offer | null => state[NameSpace.
 export const getNearbyOffers = (state: State): Offers => state[NameSpace.Offer].nearbyOffers;
 export const getReviews = (state: State): Reviews => state[NameSpace.Offer].reviews;
 export const getSelectedOfferLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isSelectedOfferLoading;
+export const getErrorSelectedOfferLoading = (state: State): boolean => state[NameSpace.Offer].errorSelectedOfferLoading;
 export const getNearbyOffersLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isNearbyOffersLoading;
 export const getReviewsLoadingStatus = (state: State): boolean => state[NameSpace.Offer].isReviewsLoading;
 export const getReviewSendingStatus = (state: State): boolean => state[NameSpace.Offer].isReviewSending;
